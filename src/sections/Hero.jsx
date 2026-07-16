@@ -109,12 +109,7 @@ export const Hero = () => {
               <Button size="lg" onClick={scrollToContact}>
                 Contact Me <ArrowRight className="w-5 h-5" />
               </Button>
-              <AnimatedBorderButton
-                href="/resume.pdf"
-                download="Mahammad-Ziyad-Resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <AnimatedBorderButton>
                 <Download className="w-5 h-5" />
                 Download CV
               </AnimatedBorderButton>

@@ -5,7 +5,7 @@ const projects = [
     title: "SkillBridge: Learning Management System",
     description:
       "A full-stack learning management system featuring course management, secure authentication, student progress tracking, and online payment integration.",
-    image: "/projects/Project1.png",
+    image: "/projects/project1.png",
     tags: ["React.js", "Express.js", "MongoDB Atlas", "Razorpay"],
     link: "https://github.com/ziyad251/SkillBridge",
     github: "https://github.com/ziyad251/SkillBridge",
@@ -14,7 +14,7 @@ const projects = [
     title: "PrepGuide AI",
     description:
       "An AI-powered interview preparation platform that generates personalized questions, conducts mock interviews, and provides personalized performance feedback and interview insights.",
-    image: "/projects/Project2.png",
+    image: "/projects/project2.png",
     tags: ["React.js", "Express.js", "MongoDB Atlas", "Gemini API"],
     link: "https://github.com/ziyad251/PrepGuide-AI",
     github: "https://github.com/ziyad251/PrepGuide-AI",
@@ -23,7 +23,7 @@ const projects = [
     title: "NeuroLens: Alzheimer's Classification",
     description:
       "An AI-driven healthcare application that classifies Alzheimer's stages from MRI scans and provides explainable AI predictions using Grad-CAM visualizations.",
-    image: "/projects/Project3.png",
+    image: "/projects/project3.png",
     tags: ["PyTorch", "Flask", "Docker", "MongoDB","Streamlit"],
     link: "https://github.com/ziyad251/NeuroLens",
     github: "https://github.com/ziyad251/NeuroLens",
@@ -32,7 +32,7 @@ const projects = [
     title: "Portfolio Website",
     description:
       "A modern developer portfolio showcasing projects, technical skills, and experience with responsive design and smooth user interactions.",
-    image: "/projects/Project4.png",
+    image: "/projects/project4.png",
     tags: ["Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"],
     link: "https://github.com/ziyad251/portfolio.git",
     github: "https://github.com/ziyad251/portfolio.git",
