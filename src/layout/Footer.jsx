@@ -1,15 +1,22 @@
-import { Github, Linkedin, Twitter, Heart } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  {
+    icon: Github,
+    href: "https://github.com/ziyad251",
+    label: "GitHub",
+  },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/mahammad-ziyad-890404299/",
+    label: "LinkedIn",
+  },
 ];
 
 const footerLinks = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Experience" },
+  { href: "#experience", label: "Learning" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -17,16 +24,14 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 border-t border-border">
-      <div className="container mx-auto px-6">
+    <footer className="mt-4 border-t border-border/60 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+      <div className="content-wrap py-12 md:py-14">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Logo & Copyright */}
           <div className="text-center md:text-left">
-            <a href="#" className="text-xl font-bold tracking-tight">
-              PM<span className="text-primary">.</span>
-            </a>
+            <a href="#" aria-label="Home" className="inline-flex h-2.5 w-2.5 rounded-full bg-primary/80" />
             <p className="text-sm text-muted-foreground mt-2">
-              © {currentYear} Pedro Machado. All rights reserved.
+              © {currentYear} Mahammad Ziyad. All rights reserved.
             </p>
           </div>
 
@@ -36,7 +41,7 @@ export const Footer = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
                 {link.label}
               </a>
@@ -50,7 +55,7 @@ export const Footer = () => {
                 key={social.label}
                 href={social.href}
                 aria-label={social.label}
-                className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all"
+                className="p-2 rounded-2xl glass border border-border/40 hover:bg-primary/10 hover:text-primary transition-all duration-300 hover:-translate-y-0.5"
               >
                 <social.icon className="w-5 h-5" />
               </a>

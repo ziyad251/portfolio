@@ -1,26 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0f1418;
-  --color-foreground: #f0f2f5;
+  --color-background: #0a0a0a;
+  --color-foreground: #f5f5f5;
 
-  --color-card: #141a1f;
+  --color-card: #1a1a1a;
 
-  --color-primary: #20b2a6;
-  --color-primary-foreground: #ffffff;
+  --color-primary: #a8a8a8;
+  --color-primary-foreground: #000000;
 
-  --color-secondary: #1f2830;
-  --color-secondary-foreground: #20b2a6;
+  --color-secondary: #262626;
+  --color-secondary-foreground: #e8e8e8;
 
-  --color-muted: #252e37;
-  --color-muted-foreground: #7a8491;
+  --color-muted: #333333;
+  --color-muted-foreground: #999999;
 
-  --color-border: #242b32;
+  --color-border: #2a2a2a;
 
-  --radius: 0.75rem;
+  --radius: 1rem;
 
-  --color-highlight: #f5a623;
-  --color-surface: #1a2329;
+  --color-highlight: #ffffff;
+  --color-surface: #141414;
+
+  --shadow-soft: 0 1px 0 color-mix(in srgb, var(--color-border) 55%, transparent),
+    0 12px 40px -12px color-mix(in srgb, #000000 65%, transparent);
+  --shadow-soft-lg: 0 1px 0 color-mix(in srgb, var(--color-border) 45%, transparent),
+    0 24px 56px -16px color-mix(in srgb, #000000 55%, transparent);
+  --shadow-inset-glass: inset 0 1px 0
+    color-mix(in srgb, var(--color-highlight) 6%, transparent);
 }
 
 @layer base {
@@ -36,6 +43,14 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-primary) 28%, transparent);
+    color: var(--color-foreground);
   }
 
   .font-serif {
@@ -44,16 +59,72 @@
 }
 
 @layer components {
+  /* ~1400px max width, 20–32px side gutters (not edge-to-edge) */
+  .content-wrap {
+    width: 100%;
+    max-width: 87.5rem; /* 1400px */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: max(1.25rem, env(safe-area-inset-left));
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+
+  @media (min-width: 768px) {
+    .content-wrap {
+      padding-left: max(1.5rem, env(safe-area-inset-left));
+      padding-right: max(1.5rem, env(safe-area-inset-right));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .content-wrap {
+      padding-left: max(1.75rem, env(safe-area-inset-left));
+      padding-right: max(1.75rem, env(safe-area-inset-right));
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .content-wrap {
+      padding-left: max(2rem, env(safe-area-inset-left));
+      padding-right: max(2rem, env(safe-area-inset-right));
+    }
+  }
+
+  .section-surface {
+    border-radius: 1.75rem;
+    border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+    background: color-mix(in srgb, var(--color-surface) 35%, transparent);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-soft), var(--shadow-inset-glass);
+  }
+
   .glass {
-    background-color: color-mix(in srgb, var(--color-surface) 50%, transparent);
-    backdrop-filter: blur(16px);
-    border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+    background-color: color-mix(in srgb, var(--color-surface) 52%, transparent);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid color-mix(in srgb, var(--color-border) 55%, transparent);
+    box-shadow: var(--shadow-soft), var(--shadow-inset-glass);
   }
 
   .glass-strong {
-    background-color: color-mix(in srgb, var(--color-surface) 80%, transparent);
-    backdrop-filter: blur(24px);
-    border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+    background-color: color-mix(in srgb, var(--color-surface) 82%, transparent);
+    backdrop-filter: blur(26px);
+    -webkit-backdrop-filter: blur(26px);
+    border: 1px solid color-mix(in srgb, var(--color-border) 62%, transparent);
+    box-shadow: var(--shadow-soft-lg), var(--shadow-inset-glass);
+  }
+
+  .card-elevated {
+    border-radius: 1.25rem;
+    transition: box-shadow 0.35s ease, border-color 0.35s ease,
+      transform 0.35s ease;
+  }
+
+  .card-elevated:hover {
+    border-color: color-mix(in srgb, var(--color-border) 90%, transparent);
+    box-shadow: var(--shadow-soft-lg), var(--shadow-inset-glass);
+    transform: translateY(-2px);
   }
 
   .glow-text {

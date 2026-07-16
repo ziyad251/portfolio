@@ -11,7 +11,7 @@ const highlights = [
     icon: Rocket,
     title: "Performance",
     description:
-      "Optimizing for speed and delivering lightning-fast user experiences.",
+      "Optimizing backend performance, scalability, and reliability.",
   },
   {
     icon: Users,
@@ -28,9 +28,13 @@ const highlights = [
 
 export const About = () => {
   return (
-    <section id="about" className="py-32 relative overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section
+      id="about"
+      className="py-12 md:py-16 lg:py-20 relative overflow-hidden scroll-mt-28"
+    >
+      <div className="content-wrap relative z-10">
+        <div className="section-surface p-8 md:p-10 lg:p-12 xl:p-14">
+          <div className="grid lg:grid-cols-2 gap-14 lg:gap-16 items-start">
           {/* Left Column */}
           <div className="space-y-8">
             <div className="animate-fade-in">
@@ -39,62 +43,48 @@ export const About = () => {
               </span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight animate-fade-in animation-delay-100 text-secondary-foreground">
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight text-balance animate-fade-in animation-delay-100 text-secondary-foreground">
               Building the future,
               <span className="font-serif italic font-normal text-white">
                 {" "}
-                one component at a time.
+                one line of code at a time.
               </span>
             </h2>
 
-            <div className="space-y-4 text-muted-foreground animate-fade-in animation-delay-200">
+            <div className="space-y-4 text-muted-foreground leading-relaxed animate-fade-in animation-delay-200">
               <p>
-                I'm a passionate software engineer with over 5 years of
-                experience crafting digital products that make a difference. My
-                journey started with a curiosity for how things work on the web,
-                and it has evolved into a deep expertise in modern frontend
-                technologies.
+                I’m a Computer Science student and backend developer passionate about building scalable, secure, and efficient applications. I enjoy turning ideas into real-world solutions by designing robust APIs, optimizing databases, and developing reliable server-side systems.
               </p>
               <p>
-                I specialize in React, Next.js, and TypeScript, building
-                everything from sleek landing pages to complex enterprise
-                applications. My approach combines technical excellence with a
-                keen eye for design and user experience.
+                My primary expertise lies in Java, Node.js, Express.js, PostgreSQL, and MongoDB. I also enjoy working across the full stack when needed to build complete, end-to-end applications. I’ve developed projects ranging from AI-powered healthcare applications to learning management systems, giving me hands-on experience with modern software engineering practices.
               </p>
               <p>
-                When I'm not coding, you'll find me exploring new technologies,
-                contributing to open-source projects, or sharing knowledge with
-                the developer community.
+                I’m currently exploring cloud computing and expanding my skills in AWS, Docker, and Kubernetes, with the goal of building cloud-native, production-ready applications. I believe in continuously learning new technologies and applying them to solve practical problems through clean, maintainable code.
               </p>
             </div>
 
-            <div className="glass rounded-2xl p-6 glow-border animate-fade-in animation-delay-300">
-              <p className="text-lg font-medium italic text-foreground">
-                "My mission is to create digital experiences that are not just
-                functional, but truly delightful — products that users love to
-                use and developers love to maintain."
-              </p>
-            </div>
+            
           </div>
 
           {/* Right Column - Hilights */}
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-5 md:gap-6">
             {highlights.map((item, idx) => (
               <div
                 key={idx}
-                className="glass p-6 rounded-2xl animate-fade-in"
+                className="group glass p-6 md:p-7 rounded-2xl border border-border/40 card-elevated animate-fade-in"
                 style={{ animationDelay: `${(idx + 1) * 100}ms` }}
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 hover:bg-primary/20">
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-primary/20">
                   <item.icon className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {item.description}
                 </p>
               </div>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </section>
