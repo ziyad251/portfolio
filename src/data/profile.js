@@ -1,8 +1,7 @@
 // Contact details used across the site (Hero, Contact, Footer).
 
-// TODO: add the email address to show on the site, e.g. "name@example.com".
-// While this is empty, every email link and the email card stay hidden.
-export const EMAIL = "";
+// Email shown on the site. Set it to "" to hide every email link and the email card.
+export const EMAIL = "mahammadziyad251@gmail.com";
 
 export const GITHUB_URL = "https://github.com/ziyad251";
 export const LINKEDIN_URL =
