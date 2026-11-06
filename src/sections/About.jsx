@@ -41,22 +41,14 @@ export const About = () => {
                 accent="that solves real problems."
                 className="mb-4 md:mb-5"
               />
-              <div className="space-y-3 text-muted leading-relaxed animate-fade-in animation-delay-200">
-                <p>
-                  I'm a Computer Science student and software developer. I enjoy
-                  turning slow or manual processes into working software.
-                </p>
-                <p>
-                  I mostly work with Java, Python, Node.js, Express, Flask and
-                  PostgreSQL, and I'm interested in cloud, data science and AI
-                  systems. In my internship, I joined stakeholder meetings to
-                  understand what the business needed.
-                </p>
-                <p>
-                  I'm learning Japanese (JLPT N5) and want to build my career in
-                  Japan.
-                </p>
-              </div>
+              <p className="text-muted leading-relaxed animate-fade-in animation-delay-200">
+                I'm a Computer Science student and software developer who enjoys
+                turning slow, manual processes into software that just works. I
+                mostly build with Java, Python, Node.js, Express, Flask and
+                PostgreSQL, and I'm especially interested in cloud, data science
+                and AI systems. I'm also learning Japanese (JLPT N5) and want to
+                build my career in Japan.
+              </p>
             </div>
 
             {/* Right Column - Highlights (equal-height cards) */}

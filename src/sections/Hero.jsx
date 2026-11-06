@@ -72,7 +72,7 @@ const socialLinks = [
     : []),
 ];
 
-// Very subtle drifting dots in the muted colour.
+// Very subtle drifting dots in the border colour.
 const heroDots = Array.from({ length: 24 }, (_, index) => ({
   id: index,
   left: `${(index * 11 + 7) % 100}%`,
@@ -99,7 +99,7 @@ export const Hero = () => {
         {heroDots.map((dot) => (
           <div
             key={dot.id}
-            className="absolute w-1 h-1 rounded-full bg-muted opacity-25"
+            className="absolute w-1 h-1 rounded-full bg-border"
             style={{
               left: dot.left,
               top: dot.top,
