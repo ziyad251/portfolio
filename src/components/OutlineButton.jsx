@@ -1,4 +1,4 @@
-// Secondary button: transparent with a solid border. Renders a link when
+// Secondary button: transparent with a solid text-coloured border. Renders a link when
 // `href` is set, otherwise a button.
 export const OutlineButton = ({
   children,
@@ -12,7 +12,7 @@ export const OutlineButton = ({
     lg: "px-8 py-4 text-lg",
   };
 
-  const classes = `inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-transparent text-text font-medium transition-colors duration-300 hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${sizeClasses[size]} ${className}`;
+  const classes = `inline-flex items-center justify-center gap-2 rounded-xl border border-text bg-transparent text-text font-medium transition-colors duration-300 hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${sizeClasses[size]} ${className}`;
 
   if (href) {
     return (

@@ -6,12 +6,8 @@ const experiences = [
     role: "Backend Developer Intern",
     company: "Zephvion Pvt. Ltd.",
     // TODO: add team size once confirmed (4 or 7), e.g. "Team of 4".
-    description: [
-      "NammaDharani is a real-estate platform that connects property owners (vendors) with buyers.",
-      "I built notifications and SMS alerts that tell vendors when a buyer asks about their property, and fixed a bug that stopped these notifications from being delivered.",
-      "I also wrote the JWT login and worked on an LLM chatbot that answers buyers' questions about price, plot size and rooms.",
-      "I attended stakeholder meetings to understand what the business needed.",
-    ],
+    description:
+      "At Zephvion, I worked on NammaDharani, a real-estate platform that connects property owners with buyers. I built the notification and SMS system that alerts owners as soon as a buyer enquires about their property, and tracked down and fixed a bug that was stopping those alerts from reaching them. I also wrote the JWT-based login and worked on an LLM chatbot that answers buyers' common questions about price, plot size and rooms. Attending stakeholder meetings taught me to understand what the business actually needed before writing code.",
     technologies: ["Python", "Flask", "MySQL", "Docker", "AWS"],
   },
 ];
@@ -52,11 +48,9 @@ export const Experience = () => {
                       </span>
                     </div>
                     <p className="text-muted">{exp.company}</p>
-                    <div className="text-sm text-muted mt-3 leading-relaxed space-y-1.5">
-                      {exp.description.map((sentence, sIdx) => (
-                        <p key={sIdx}>{sentence}</p>
-                      ))}
-                    </div>
+                    <p className="text-sm text-muted mt-3 leading-relaxed">
+                      {exp.description}
+                    </p>
                     <div className="flex flex-wrap gap-1.5 mt-4">
                       {exp.technologies.map((tech) => (
                         <span

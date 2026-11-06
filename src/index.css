@@ -5,21 +5,24 @@
   e.g. bg-bg, bg-surface, border-border, text-text, text-muted, text-accent,
   bg-accent-soft. Components use only these tokens.
 
-  Contrast (WCAG): text on bg 14.8:1, on surface 13.6:1;
-  muted on bg 7.2:1, on surface 6.7:1; accent on bg 4.9:1, on surface 4.5:1;
-  bg-coloured text on accent (primary buttons) 4.9:1.
+  Light theme. Contrast (WCAG): text on bg 14.6:1, on surface 16.2:1;
+  muted on bg 5.4:1, on surface 5.9:1; accent on bg 4.6:1, on surface 5.1:1;
+  white (on-accent) text on accent buttons 5.1:1.
 */
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
 
-  --color-bg: #0e1424; /* page background, deep indigo */
-  --color-surface: #151c30; /* cards, scrolled navbar, inputs */
-  --color-border: #253049; /* card borders, dividers */
-  --color-text: #ece6d9; /* main text, warm off-white */
-  --color-muted: #9aa3b5; /* secondary text, labels */
-  --color-accent: #e2553f; /* vermilion: the only accent colour */
-  --color-accent-soft: rgba(226, 85, 63, 0.12); /* tint behind accent elements */
+  --color-bg: #f6f3ec; /* page background, warm off-white */
+  --color-surface: #ffffff; /* cards, scrolled navbar, inputs */
+  --color-border: #e3ddd1; /* card borders, dividers */
+  --color-text: #1a2033; /* ink indigo: headings and body */
+  --color-muted: #5d6474; /* secondary text, labels */
+  --color-accent: #c4412c; /* vermilion: the only accent colour */
+  --color-accent-soft: rgba(196, 65, 44, 0.08); /* tint behind accent elements */
+  --color-on-accent: #ffffff; /* text on accent buttons */
+
+  --shadow-card: 0 1px 2px rgba(26, 32, 51, 0.06); /* soft, neutral */
 }
 
 @layer base {
@@ -99,11 +102,12 @@
     border: 1px solid var(--color-border);
   }
 
-  /* Card: solid surface, thin border, no shadow */
+  /* Card: solid surface, thin border, very soft neutral shadow */
   .card {
     border-radius: 1rem;
     border: 1px solid var(--color-border);
     background-color: var(--color-surface);
+    box-shadow: var(--shadow-card);
     transition: border-color 0.3s ease, transform 0.3s ease;
   }
 
