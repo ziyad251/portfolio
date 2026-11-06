@@ -1,33 +1,25 @@
 @import "tailwindcss";
 
+/*
+  Colour palette. Tailwind v4 turns each --color-* token into utilities,
+  e.g. bg-bg, bg-surface, border-border, text-text, text-muted, text-accent,
+  bg-accent-soft. Components use only these tokens.
+
+  Contrast (WCAG): text on bg 14.8:1, on surface 13.6:1;
+  muted on bg 7.2:1, on surface 6.7:1; accent on bg 4.9:1, on surface 4.5:1;
+  bg-coloured text on accent (primary buttons) 4.9:1.
+*/
 @theme {
-  --color-background: #0a0a0a;
-  --color-foreground: #f5f5f5;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
 
-  --color-card: #1a1a1a;
-
-  --color-primary: #a8a8a8;
-  --color-primary-foreground: #000000;
-
-  --color-secondary: #262626;
-  --color-secondary-foreground: #e8e8e8;
-
-  --color-muted: #333333;
-  --color-muted-foreground: #999999;
-
-  --color-border: #2a2a2a;
-
-  --radius: 1rem;
-
-  --color-highlight: #ffffff;
-  --color-surface: #141414;
-
-  --shadow-soft: 0 1px 0 color-mix(in srgb, var(--color-border) 55%, transparent),
-    0 12px 40px -12px color-mix(in srgb, #000000 65%, transparent);
-  --shadow-soft-lg: 0 1px 0 color-mix(in srgb, var(--color-border) 45%, transparent),
-    0 24px 56px -16px color-mix(in srgb, #000000 55%, transparent);
-  --shadow-inset-glass: inset 0 1px 0
-    color-mix(in srgb, var(--color-highlight) 6%, transparent);
+  --color-bg: #0e1424; /* page background, deep indigo */
+  --color-surface: #151c30; /* cards, scrolled navbar, inputs */
+  --color-border: #253049; /* card borders, dividers */
+  --color-text: #ece6d9; /* main text, warm off-white */
+  --color-muted: #9aa3b5; /* secondary text, labels */
+  --color-accent: #e2553f; /* vermilion: the only accent colour */
+  --color-accent-soft: rgba(226, 85, 63, 0.12); /* tint behind accent elements */
 }
 
 @layer base {
@@ -40,29 +32,25 @@
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    font-family: "Inter", sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background-color: color-mix(in srgb, var(--color-primary) 28%, transparent);
-    color: var(--color-foreground);
-  }
-
-  .font-serif {
-    font-family: "Playfair Display", serif;
+    background-color: var(--color-accent-soft);
+    color: var(--color-text);
   }
 }
 
 @layer components {
-  /* ~1400px max width, 20–32px side gutters (not edge-to-edge) */
+  /* Same max width for every section (64rem = Tailwind max-w-5xl), centred */
   .content-wrap {
     width: 100%;
-    max-width: 87.5rem; /* 1400px */
+    max-width: 64rem; /* 1024px */
     margin-left: auto;
     margin-right: auto;
     padding-left: max(1.25rem, env(safe-area-inset-left));
@@ -90,52 +78,47 @@
     }
   }
 
+  /* Vertical rhythm shared by all sections below the hero */
+  .section-block {
+    position: relative;
+    scroll-margin-top: 5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-block {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  /* Section panel: a thin outline on the page background, no fill */
   .section-surface {
-    border-radius: 1.75rem;
-    border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
-    background: color-mix(in srgb, var(--color-surface) 35%, transparent);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: var(--shadow-soft), var(--shadow-inset-glass);
+    border-radius: 1.5rem;
+    border: 1px solid var(--color-border);
   }
 
-  .glass {
-    background-color: color-mix(in srgb, var(--color-surface) 52%, transparent);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid color-mix(in srgb, var(--color-border) 55%, transparent);
-    box-shadow: var(--shadow-soft), var(--shadow-inset-glass);
+  /* Card: solid surface, thin border, no shadow */
+  .card {
+    border-radius: 1rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    transition: border-color 0.3s ease, transform 0.3s ease;
   }
 
-  .glass-strong {
-    background-color: color-mix(in srgb, var(--color-surface) 82%, transparent);
-    backdrop-filter: blur(26px);
-    -webkit-backdrop-filter: blur(26px);
-    border: 1px solid color-mix(in srgb, var(--color-border) 62%, transparent);
-    box-shadow: var(--shadow-soft-lg), var(--shadow-inset-glass);
-  }
-
-  .card-elevated {
-    border-radius: 1.25rem;
-    transition: box-shadow 0.35s ease, border-color 0.35s ease,
-      transform 0.35s ease;
-  }
-
-  .card-elevated:hover {
-    border-color: color-mix(in srgb, var(--color-border) 90%, transparent);
-    box-shadow: var(--shadow-soft-lg), var(--shadow-inset-glass);
+  .card-hover:hover {
+    border-color: color-mix(in srgb, var(--color-muted) 45%, var(--color-border));
     transform: translateY(-2px);
   }
 
-  .glow-text {
-    text-shadow: 0 0 30px
-      color-mix(in srgb, var(--color-primary) 50%, transparent);
-  }
-
-  .glow-border {
-    box-shadow: 0 0 20px
-        color-mix(in srgb, var(--color-primary) 20%, transparent),
-      inset 0 0 20px color-mix(in srgb, var(--color-primary) 5%, transparent);
+  /* Eyebrow label above section headings ("ABOUT ME", "FEATURED WORK") */
+  .eyebrow {
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 }
 
@@ -169,35 +152,8 @@
     }
   }
 
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
   .animate-fade-in {
     animation: fade-in 0.8s ease-out both;
-  }
-
-  .animate-float {
-    animation: float 4s ease-in-out infinite;
-  }
-
-  .animate-marquee {
-    animation: marquee 30s linear infinite;
   }
 
   .animation-delay-100 {
@@ -223,33 +179,17 @@
   .animation-delay-600 {
     animation-delay: 600ms;
   }
+}
 
-  .animation-delay-800 {
-    animation-delay: 800ms;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  @keyframes animated-border {
-    0% {
-      stroke-dashoffset: 400;
-    }
-    100% {
-      stroke-dashoffset: -550;
-    }
-  }
-
-  .group:hover .animated-border-path {
-    animation: animated-border 1.5s linear infinite;
-  }
-
-  .animated-border:hover {
-    background-color: color-mix(in srgb, #26c4b8 15%, transparent);
-    backdrop-filter: blur(16px);
-    box-shadow: 0 0 20px color-mix(in srgb, #26c4b8 20%, transparent);
-  }
-
-  .timeline-glow {
-    box-shadow: 0 0 40px
-        color-mix(in srgb, var(--color-primary) 35%, transparent),
-      0 0 80px color-mix(in srgb, var(--color-primary) 25%, transparent);
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }

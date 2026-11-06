@@ -1,90 +1,85 @@
-import { Code2, Lightbulb, Rocket, Users } from "lucide-react";
+import { Briefcase, FileText, GraduationCap, Languages } from "lucide-react";
+import { SectionHeader } from "@/components/SectionHeader";
 
 const highlights = [
   {
-    icon: Code2,
-    title: "Clean Code",
+    icon: GraduationCap,
+    title: "B.Tech CSE · 2027 · CGPA 8.81",
     description:
-      "Writing maintainable, scalable code that stands the test of time.",
+      "Sahyadri College of Engineering and Management (VTU), Mangalore.",
   },
   {
-    icon: Rocket,
-    title: "Performance",
+    icon: Briefcase,
+    title: "Backend intern at Zephvion",
     description:
-      "Optimizing backend performance, scalability, and reliability.",
+      "Built notifications, SMS and login for a real-estate platform (April 2026 – June 2026).",
   },
   {
-    icon: Users,
-    title: "Collaboration",
-    description: "Working closely with teams to bring ideas to life.",
+    icon: FileText,
+    title: "IEEE paper accepted (2026)",
+    description:
+      "My NeuroLens paper was accepted for oral presentation at IEEE IT-EICICS 2026.",
   },
   {
-    icon: Lightbulb,
-    title: "Innovation",
-    description:
-      "Staying ahead with the latest technologies and best practices.",
+    icon: Languages,
+    title: "Japanese · JLPT N5 · still learning",
+    description: "I passed JLPT N5 and I'm continuing to study.",
   },
 ];
 
 export const About = () => {
   return (
-    <section
-      id="about"
-      className="py-12 md:py-16 lg:py-20 relative overflow-hidden scroll-mt-28"
-    >
-      <div className="content-wrap relative z-10">
-        <div className="section-surface p-8 md:p-10 lg:p-12 xl:p-14">
-          <div className="grid lg:grid-cols-2 gap-14 lg:gap-16 items-start">
-          {/* Left Column */}
-          <div className="space-y-8">
-            <div className="animate-fade-in">
-              <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase">
-                About Me
-              </span>
-            </div>
-
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight text-balance animate-fade-in animation-delay-100 text-secondary-foreground">
-              Building the future,
-              <span className="font-serif italic font-normal text-white">
-                {" "}
-                one line of code at a time.
-              </span>
-            </h2>
-
-            <div className="space-y-4 text-muted-foreground leading-relaxed animate-fade-in animation-delay-200">
-              <p>
-                I’m a Computer Science student and backend developer passionate about building scalable, secure, and efficient applications. I enjoy turning ideas into real-world solutions by designing robust APIs, optimizing databases, and developing reliable server-side systems.
-              </p>
-              <p>
-                My primary expertise lies in Java, Node.js, Express.js, PostgreSQL, and MongoDB. I also enjoy working across the full stack when needed to build complete, end-to-end applications. I’ve developed projects ranging from AI-powered healthcare applications to learning management systems, giving me hands-on experience with modern software engineering practices.
-              </p>
-              <p>
-                I’m currently exploring cloud computing and expanding my skills in AWS, Docker, and Kubernetes, with the goal of building cloud-native, production-ready applications. I believe in continuously learning new technologies and applying them to solve practical problems through clean, maintainable code.
-              </p>
-            </div>
-
-            
-          </div>
-
-          {/* Right Column - Hilights */}
-          <div className="grid sm:grid-cols-2 gap-5 md:gap-6">
-            {highlights.map((item, idx) => (
-              <div
-                key={idx}
-                className="group glass p-6 md:p-7 rounded-2xl border border-border/40 card-elevated animate-fade-in"
-                style={{ animationDelay: `${(idx + 1) * 100}ms` }}
-              >
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-primary/20">
-                  <item.icon className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {item.description}
+    <section id="about" className="section-block">
+      <div className="content-wrap">
+        <div className="section-surface p-6 md:p-8 lg:p-10">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+            {/* Left Column */}
+            <div>
+              <SectionHeader
+                eyebrow="About Me"
+                title="I build software"
+                accent="that solves real problems."
+                className="mb-4 md:mb-5"
+              />
+              <div className="space-y-3 text-muted leading-relaxed animate-fade-in animation-delay-200">
+                <p>
+                  I'm a Computer Science student and software developer. I enjoy
+                  turning slow or manual processes into working software.
+                </p>
+                <p>
+                  I mostly work with Java, Python, Node.js, Express, Flask and
+                  PostgreSQL, and I'm interested in cloud, data science and AI
+                  systems. In my internship, I joined stakeholder meetings to
+                  understand what the business needed.
+                </p>
+                <p>
+                  I'm learning Japanese (JLPT N5) and want to build my career in
+                  Japan.
                 </p>
               </div>
-            ))}
+            </div>
+
+            {/* Right Column - Highlights (equal-height cards) */}
+            <div className="grid sm:grid-cols-2 auto-rows-fr gap-3 md:gap-4">
+              {highlights.map((item, idx) => (
+                <div
+                  key={item.title}
+                  className="card card-hover h-full p-4 md:p-5 animate-fade-in"
+                  style={{ animationDelay: `${(idx + 1) * 100}ms` }}
+                >
+                  <div className="w-9 h-9 rounded-lg bg-bg border border-border flex items-center justify-center mb-3">
+                    <item.icon className="w-4.5 h-4.5 text-muted" />
+                  </div>
+                  <h3 className="text-sm md:text-base font-semibold text-text mb-1">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs md:text-sm text-muted leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </section>
