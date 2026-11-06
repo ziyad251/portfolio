@@ -1,6 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mahammad Ziyad logo">
-  <rect width="64" height="64" rx="16" fill="#0a0a0a"/>
-  <path d="M18 20h10c8 0 14 6 14 14s-6 14-14 14H18V20z" fill="#7c3aed"/>
-  <path d="M34 20h12v28H34z" fill="#ffffff"/>
-  <path d="M16 48h10" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MZ monogram">
+  <rect width="64" height="64" rx="14" fill="#0E1424"/>
+  <text x="32" y="39" text-anchor="middle" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="-0.5" fill="#ECE6D9">MZ</text>
+  <rect x="21" y="46" width="22" height="3" rx="1.5" fill="#E2553F"/>
 </svg>

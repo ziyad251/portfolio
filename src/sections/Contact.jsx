@@ -1,7 +1,41 @@
-import { Mail, Github, Send, CheckCircle, AlertCircle } from "lucide-react";
+import {
+  Mail,
+  Github,
+  Linkedin,
+  Send,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react";
 import { Button } from "@/components/Button";
+import { SectionHeader } from "@/components/SectionHeader";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/data/profile";
+
+const contactLinks = [
+  ...(EMAIL
+    ? [{ icon: Mail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}`, external: false }]
+    : []),
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    // The zero-width space lets the URL wrap after "in/" on small screens
+    value: "linkedin.com/in/\u200Bmahammad-ziyad-890404299",
+    href: LINKEDIN_URL,
+    external: true,
+  },
+  {
+    icon: Github,
+    label: "GitHub",
+    value: "github.com/ziyad251",
+    href: GITHUB_URL,
+    external: true,
+  },
+];
+
+const fallbackError = EMAIL
+  ? `Sorry, the message could not be sent. Please try again later, or email me at ${EMAIL}.`
+  : "Sorry, the message could not be sent. Please try again later.";
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -26,9 +60,7 @@ export const Contact = () => {
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
       if (!serviceId || !templateId || !publicKey) {
-        throw new Error(
-          "EmailJS configuration is missing. Please check your environment variables."
-        );
+        throw new Error("EmailJS environment variables are missing.");
       }
 
       await emailjs.send(
@@ -49,47 +81,31 @@ export const Contact = () => {
       setFormData({ name: "", email: "", message: "" });
     } catch (err) {
       console.error("EmailJS error:", err);
-      setSubmitStatus({
-        type: "error",
-        message:
-          err?.text || err?.message || "Failed to send message. Please try again later.",
-      });
+      // Show a friendly message to visitors; technical details stay in the console.
+      setSubmitStatus({ type: "error", message: fallbackError });
     } finally {
       setIsLoading(false);
     }
   };
   return (
-    <section id="contact" className="py-12 md:py-16 lg:py-20 relative overflow-hidden scroll-mt-28">
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-highlight/5 rounded-full blur-3xl" />
-      </div>
+    <section id="contact" className="section-block">
+      <div className="content-wrap">
+        <div className="section-surface p-6 md:p-8 lg:p-10">
+          <SectionHeader
+            center
+            eyebrow="Get In Touch"
+            title="Let's build"
+            accent="something great."
+            intro="Interested in working together? Send me a message or email me directly."
+          />
 
-      <div className="content-wrap relative z-10">
-        <div className="section-surface p-8 md:p-10 lg:p-12 xl:p-14">
-          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-            <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">
-              Get In Touch
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 tracking-tight text-balance animate-fade-in animation-delay-100 text-secondary-foreground">
-              Let's build{" "}
-              <span className="font-serif italic font-normal text-white">
-                something great.
-              </span>
-            </h2>
-            <p className="text-muted-foreground leading-relaxed animate-fade-in animation-delay-200">
-              Have a project in mind? I'd love to hear about it. Send me a message
-              and let's discuss how we can work together.
-            </p>
-          </div>
-
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto">
-          <div className="glass p-7 md:p-9 rounded-2xl border border-border/45 animate-fade-in animation-delay-300 shadow-[var(--shadow-soft)]">
-            <form className="space-y-6" onSubmit={handleSubmit}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 items-stretch">
+          <div className="card p-5 md:p-6 animate-fade-in animation-delay-300">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium mb-2"
+                  className="block text-sm font-medium text-text mb-1.5"
                 >
                   Name
                 </label>
@@ -102,14 +118,14 @@ export const Contact = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full px-4 py-3.5 bg-surface rounded-xl border border-border/60 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300"
+                  className="w-full px-4 py-3 bg-surface text-text placeholder:text-muted rounded-xl border border-border focus:border-accent focus:ring-2 focus:ring-accent/40 outline-none transition-colors duration-300"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium mb-2"
+                  className="block text-sm font-medium text-text mb-1.5"
                 >
                   Email
                 </label>
@@ -122,33 +138,33 @@ export const Contact = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="w-full px-4 py-3.5 bg-surface rounded-xl border border-border/60 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300"
+                  className="w-full px-4 py-3 bg-surface text-text placeholder:text-muted rounded-xl border border-border focus:border-accent focus:ring-2 focus:ring-accent/40 outline-none transition-colors duration-300"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium mb-2"
+                  className="block text-sm font-medium text-text mb-1.5"
                 >
                   Message
                 </label>
                 <textarea
-                  rows={5}
+                  id="message"
+                  rows={4}
                   required
                   value={formData.message}
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
                   placeholder="Your message..."
-                  className="w-full px-4 py-3.5 bg-surface rounded-xl border border-border/60 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300 resize-none"
+                  className="w-full px-4 py-3 bg-surface text-text placeholder:text-muted rounded-xl border border-border focus:border-accent focus:ring-2 focus:ring-accent/40 outline-none transition-colors duration-300 resize-none"
                 />
               </div>
 
               <Button
                 className="w-full"
                 type="submit"
-                size="lg"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -163,17 +179,17 @@ export const Contact = () => {
 
               {submitStatus.type && (
                 <div
-                  className={`flex items-center gap-3
-                     p-4 rounded-2xl ${
-                       submitStatus.type === "success"
-                         ? "bg-gray-500/10 border border-gray-500/20 text-gray-300"
-                         : "bg-red-500/10 border border-red-500/20 text-red-400"
-                     }`}
+                  role="status"
+                  className={`flex items-center gap-3 p-4 rounded-xl border text-text ${
+                    submitStatus.type === "success"
+                      ? "bg-bg border-border"
+                      : "bg-accent-soft border-accent"
+                  }`}
                 >
                   {submitStatus.type === "success" ? (
-                    <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                    <CheckCircle className="w-5 h-5 shrink-0 text-muted" />
                   ) : (
-                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                    <AlertCircle className="w-5 h-5 shrink-0 text-accent" />
                   )}
                   <p className="text-sm">{submitStatus.message}</p>
                 </div>
@@ -182,34 +198,42 @@ export const Contact = () => {
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-6 animate-fade-in animation-delay-400">
-            <div className="glass rounded-2xl p-7 md:p-8 border border-border/40">
-              <div className="space-y-3">
-                <a
-                  href="https://github.com/ziyad251"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl border border-transparent hover:border-border/50 hover:bg-surface/60 transition-all duration-300 group"
-                >
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                    <Github className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-muted-foreground">GitHub</div>
-                    <div className="font-medium">github.com/ziyad251</div>
-                  </div>
-                </a>
+          <div className="flex flex-col gap-4 md:gap-5 animate-fade-in animation-delay-400">
+            <div className="card flex-1 flex flex-col justify-center p-3 md:p-4">
+              <div className="space-y-1">
+                {contactLinks.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    {...(item.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    className="flex items-center gap-3.5 p-3 rounded-xl border border-transparent hover:border-border hover:bg-bg transition-colors duration-300 group"
+                  >
+                    <div className="w-10 h-10 shrink-0 rounded-lg bg-bg border border-border flex items-center justify-center">
+                      <item.icon className="w-5 h-5 text-muted" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-sm text-muted">{item.label}</div>
+                      <div className="font-medium text-text group-hover:text-accent transition-colors duration-300 [overflow-wrap:anywhere]">
+                        {item.value}
+                      </div>
+                    </div>
+                  </a>
+                ))}
               </div>
             </div>
 
             {/* Availability Card */}
-            <div className="glass rounded-2xl p-7 md:p-8 border border-primary/25 hover:border-primary/40 transition-colors duration-300">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="w-3 h-3 bg-white rounded-full animate-pulse" />
-                <span className="font-medium">Currently Available</span>
+            <div className="card p-5 md:p-6">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="w-2 h-2 bg-text rounded-full" />
+                <span className="font-medium text-text">Open to opportunities</span>
               </div>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                I'm currently seeking internship and full-time software engineering opportunities. If you'd like to collaborate or discuss a project, feel free to reach out.
+              <p className="text-muted text-sm leading-relaxed">
+                Looking for full-time software engineering roles after I graduate
+                in 2027. I'm especially interested in working in Japan and I'm
+                open to relocating.
               </p>
             </div>
           </div>

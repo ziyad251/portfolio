@@ -1,103 +1,67 @@
+import { SectionHeader } from "@/components/SectionHeader";
+
 const experiences = [
   {
-    period: "April 2026 — June 2026",
+    period: "April 2026 – June 2026",
     role: "Backend Developer Intern",
     company: "Zephvion Pvt. Ltd.",
-    description:
-      "Contributed to the development of production-ready backend systems by implementing secure REST APIs, optimizing database workflows, and improving server-side performance.",
-    technologies: ["Node.js", "Express.js", "TypeScript", "NeonDB"],
-    current: true,
-  }
+    // TODO: add team size once confirmed (4 or 7), e.g. "Team of 4".
+    description: [
+      "NammaDharani is a real-estate platform that connects property owners (vendors) with buyers.",
+      "I built notifications and SMS alerts that tell vendors when a buyer asks about their property, and fixed a bug that stopped these notifications from being delivered.",
+      "I also wrote the JWT login and worked on an LLM chatbot that answers buyers' questions about price, plot size and rooms.",
+      "I attended stakeholder meetings to understand what the business needed.",
+    ],
+    technologies: ["Python", "Flask", "MySQL", "Docker", "AWS"],
+  },
 ];
 
 export const Experience = () => {
   return (
-    <section
-      id="experience"
-      className="py-12 md:py-16 lg:py-20 relative overflow-hidden scroll-mt-28"
-    >
-      <div
-        className="absolute top-1/2 left-1/4 w-96
-       h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 pointer-events-none"
-      />
+    <section id="experience" className="section-block">
+      <div className="content-wrap">
+        <div className="section-surface p-6 md:p-8 lg:p-10">
+          <SectionHeader
+            eyebrow="Experience"
+            title="Professional"
+            accent="Experience"
+            intro="Where I have worked, the problems I worked on, and what I built."
+          />
 
-      <div className="content-wrap relative z-10">
-        <div className="section-surface p-8 md:p-10 lg:p-12 xl:p-14">
-        <div className="max-w-3xl mb-12 md:mb-16">
-          <span
-            className="text-secondary-foreground text-sm
-           font-medium tracking-wider uppercase animate-fade-in"
-          >
-            Experience
-          </span>
-          <h2
-            className="text-4xl md:text-5xl font-bold
-           mt-4 mb-6 tracking-tight text-balance animate-fade-in animation-delay-100
-            text-secondary-foreground"
-          >
-            Professional{" "}
-            <span className="font-serif italic font-normal text-white">
-              {" "}
-              Experience
-            </span>
-          </h2>
+          {/* Timeline (left-aligned so a single entry uses the full width) */}
+          <div className="relative pl-7 md:pl-9">
+            <div className="absolute left-0 top-1 bottom-0 w-px bg-border" />
 
-          <p
-            className="text-muted-foreground leading-relaxed
-           animate-fade-in animation-delay-200"
-          >
-My journey of growth and learning in the world of software development, with each experience contributing to my skills and expertise.
-
-          </p>
-        </div>
-
-        {/* Timeline */}
-        <div className="relative">
-          <div className="timeline-glow absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/70 via-primary/30 to-transparent md:-translate-x-1/2 shadow-[0_0_24px_color-mix(in_srgb,var(--color-primary)_42%,transparent)]" />
-
-          {/* Experience Items */}
-          <div className="space-y-14 md:space-y-16">
-            {experiences.map((exp, idx) => (
-              <div
-                key={idx}
-                className="relative grid md:grid-cols-2 gap-8 animate-fade-in"
-                style={{ animationDelay: `${(idx + 1) * 150}ms` }}
-              >
-                {/* Timeline Dot */}
-                <div className="absolute left-0 md:left-1/2 top-0 w-3.5 h-3.5 bg-primary rounded-full -translate-x-1/2 ring-[5px] ring-background/90 z-10 shadow-[var(--shadow-soft)]">
-                  {exp.current && (
-                    <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75" />
-                  )}
-                </div>
-
-                {/* Content */}
+            <div className="space-y-6">
+              {experiences.map((exp, idx) => (
                 <div
-                  className={`pl-8 md:pl-0 ${
-                    idx % 2 === 0
-                      ? "md:pr-16 md:text-right"
-                      : "md:col-start-2 md:pl-16"
-                  }`}
+                  key={exp.company + exp.period}
+                  className="relative animate-fade-in"
+                  style={{ animationDelay: `${(idx + 1) * 150}ms` }}
                 >
-                  <div
-                    className={`glass p-6 md:p-8 rounded-2xl border border-primary/25 hover:border-primary/45 transition-all duration-500 card-elevated shadow-[var(--shadow-soft)]`}
-                  >
-                    <span className="text-sm text-primary font-medium">
-                      {exp.period}
-                    </span>
-                    <h3 className="text-xl font-semibold mt-2">{exp.role}</h3>
-                    <p className="text-muted-foreground">{exp.company}</p>
-                    <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
-                      {exp.description}
-                    </p>
-                    <div
-                      className={`flex flex-wrap gap-2 mt-4 ${
-                        idx % 2 === 0 ? "md:justify-end" : ""
-                      }`}
-                    >
-                      {exp.technologies.map((tech, techIdx) => (
+                  {/* Timeline Dot */}
+                  <div className="absolute -left-7 md:-left-9 top-6 w-3 h-3 bg-accent rounded-full -translate-x-1/2 ring-4 ring-bg" />
+
+                  <div className="card p-5 md:p-6">
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                      <h3 className="text-lg md:text-xl font-semibold text-text">
+                        {exp.role}
+                      </h3>
+                      <span className="text-sm text-muted font-medium">
+                        {exp.period}
+                      </span>
+                    </div>
+                    <p className="text-muted">{exp.company}</p>
+                    <div className="text-sm text-muted mt-3 leading-relaxed space-y-1.5">
+                      {exp.description.map((sentence, sIdx) => (
+                        <p key={sIdx}>{sentence}</p>
+                      ))}
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 mt-4">
+                      {exp.technologies.map((tech) => (
                         <span
-                          key={techIdx}
-                          className="px-3 py-1.5 bg-surface text-xs rounded-xl border border-border/50 text-muted-foreground"
+                          key={tech}
+                          className="px-2.5 py-1 bg-bg text-xs rounded-lg border border-border text-muted"
                         >
                           {tech}
                         </span>
@@ -105,10 +69,9 @@ My journey of growth and learning in the world of software development, with eac
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </section>

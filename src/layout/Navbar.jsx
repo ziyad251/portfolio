@@ -1,65 +1,86 @@
-import { Button } from "@/components/Button";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navLinks = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Learning" },
+  { href: "#experience", label: "Experience" },
+  { href: "#education", label: "Education" },
   { href: "#contact", label: "Contact" },
 ];
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeId, setActiveId] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      // Active nav item: the last section whose top has passed 40% of the
+      // screen height. None while in the hero; Contact at the page bottom.
+      const line = window.innerHeight * 0.4;
+      let current = "";
+      for (const link of navLinks) {
+        const section = document.querySelector(link.href);
+        if (section && section.getBoundingClientRect().top <= line) {
+          current = link.href;
+        }
+      }
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 4;
+      if (atBottom && window.scrollY > 0) current = "#contact";
+      setActiveId(current);
     };
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
+
+  const linkClass = (href) =>
+    href === activeId ? "text-accent" : "text-muted hover:text-accent";
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "py-3 md:py-4" : "bg-transparent py-5 md:py-6"
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-300 ${
+        isScrolled || isMobileMenuOpen
+          ? "bg-surface border-border"
+          : "bg-transparent border-transparent"
       }`}
     >
-      <div
-        className={`content-wrap transition-all duration-500 ${
-          isScrolled
-            ? "glass-strong rounded-2xl border border-border/50 shadow-[var(--shadow-soft)]"
-            : ""
-        }`}
-      >
-        <nav className="flex items-center justify-between gap-4 px-1 py-1 md:px-2">
+      <div className="content-wrap">
+        <nav className="flex items-center justify-between gap-4 h-16">
           <a
             href="#"
-            aria-label="Home"
-            className="inline-flex h-2.5 w-2.5 rounded-full bg-primary/80 transition-colors duration-300 hover:bg-primary"
-          />
+            aria-label="Mahammad Ziyad, back to top"
+            className="text-lg font-bold tracking-tight text-text transition-colors duration-300 hover:text-accent"
+          >
+            MZ
+          </a>
 
           <div className="hidden md:flex items-center gap-1">
-            <div className="glass rounded-2xl px-1.5 py-1 flex items-center gap-0.5 border border-border/40">
-              {navLinks.map((link, index) => (
-                <a
-                  href={link.href}
-                  key={index}
-                  className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-xl hover:bg-surface/80 transition-colors duration-300"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
+            {navLinks.map((link) => (
+              <a
+                href={link.href}
+                key={link.href}
+                aria-current={link.href === activeId ? "true" : undefined}
+                className={`px-3 py-2 text-sm rounded-lg transition-colors duration-300 ${linkClass(link.href)}`}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
           <button
             type="button"
-            className="md:hidden p-2 rounded-xl text-foreground cursor-pointer hover:bg-surface/60 transition-colors duration-300"
+            className="md:hidden p-2 rounded-lg text-text hover:text-accent transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
             aria-expanded={isMobileMenuOpen}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
@@ -67,26 +88,26 @@ export const Navbar = () => {
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </nav>
+      </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden mt-3 rounded-2xl border border-border/50 glass-strong animate-fade-in overflow-hidden">
-          <div className="px-4 py-6 flex flex-col gap-3">
-            {navLinks.map((link, index) => (
+        <div className="md:hidden border-t border-border bg-surface animate-fade-in">
+          <div className="content-wrap py-4 flex flex-col">
+            {navLinks.map((link) => (
               <a
                 href={link.href}
-                key={index}
+                key={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg text-muted-foreground hover:text-foreground py-2 rounded-xl px-2 -mx-2 hover:bg-surface/50 transition-colors duration-300"
+                aria-current={link.href === activeId ? "true" : undefined}
+                className={`text-lg py-2.5 transition-colors duration-300 ${linkClass(link.href)}`}
               >
                 {link.label}
               </a>
             ))}
-
           </div>
         </div>
       )}
-      </div>
     </header>
   );
 };
